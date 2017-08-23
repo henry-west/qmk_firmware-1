@@ -84,14 +84,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|------+------+------+------+------+------|
    * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO ~ |ISO | | Home | End  |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
+   * |  BL  |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
    * `-----------------------------------------------------------------------------------'
    */
   [_LOWER] = {
     {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,    KC_ASTR,    KC_LPRN, KC_RPRN, KC_DEL},
     {_______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_PIPE,    KC_PLUS,    KC_LCBR, KC_RCBR, KC_UNDS},
     {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  S(KC_NUHS), S(KC_NUBS), KC_HOME, KC_END,  _______},
-    {_______, _______, _______, _______, _______, _______, _______, _______,    KC_MNXT,    KC_VOLD, KC_VOLU, KC_MPLY}
+    {BACKLIT, _______, _______, _______, _______, _______, _______, _______,    KC_MNXT,    KC_VOLD, KC_VOLU, KC_MPLY}
   },
 
   /* Raise
@@ -102,21 +102,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|------+------+------+------+------+------|
    * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO # |ISO / |Pg Up |Pg Dn |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
+   * |  BL  |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
    * `-----------------------------------------------------------------------------------'
    */
   [_RAISE] = {
     {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL},
     {_______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_BSLS, KC_EQL,  KC_LBRC, KC_RBRC, KC_MINS},
     {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______},
-    {_______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
+    {BACKLIT, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
   },
 
   /* Numpad layer
    * ,-----------------------------------------------------------------------------------.
-   * | Esc  |      |  Up  |      |      |      |   7  |   8  |   9  |   *  |      |      |
+   * | Esc  |      |  Up  |      |      |      |   7  |   8  |   9  |   *  |      | Bksp |
    * |------+------+------+------+------+-------------+------+------+------+------+------|
-   * | Tab  | Left | Down |Right |      |      |   4  |   5  |   6  |   /  |      |      |
+   * | Tab  | Left | Down |Right |      |      |   4  |   5  |   6  |   /  |   (  |   )  |
    * |------+------+------+------+------+------|------+------+------+------+------+------|
    * |      |      |      |      |      |      |   1  |   2  |   3  |   +  |      |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -125,8 +125,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
 
   [_NUMPAD] = {
-    {KC_ESC,	XXXXXXX,    KC_UP,	    XXXXXXX,    XXXXXXX,	XXXXXXX,    KC_7,    KC_8,    KC_9,       KC_ASTR, 	XXXXXXX,	XXXXXXX},
-    {KC_TAB, 	KC_LEFT,    KC_DOWN,    KC_RIGHT,   XXXXXXX,	XXXXXXX,    KC_4,    KC_5,    KC_6,       KC_SLSH,  XXXXXXX,    XXXXXXX},
+    {KC_ESC,	XXXXXXX,    KC_UP,	    XXXXXXX,    XXXXXXX,	XXXXXXX,    KC_7,    KC_8,    KC_9,       KC_ASTR, 	XXXXXXX,	KC_BSPC},
+    {KC_TAB, 	KC_LEFT,    KC_DOWN,    KC_RIGHT,   XXXXXXX,	XXXXXXX,    KC_4,    KC_5,    KC_6,       KC_SLSH,  KC_LPRN,    KC_RPRN},
     {XXXXXXX, 	XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,	XXXXXXX,    KC_1,    KC_2,    KC_3,       KC_PLUS,  XXXXXXX,	XXXXXXX},
     {EXT_NUM, 	XXXXXXX,	XXXXXXX,	XXXXXXX,    XXXXXXX,    KC_ENT, 	KC_ENT,	 KC_0,    KC_DOT, 	  KC_MINS,	XXXXXXX,	XXXXXXX}
   },
@@ -135,18 +135,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------------------------------------------------.
    * |      | Reset|      |      |      |      |      |      |      |      |      |  Del |
    * |------+------+------+------+------+-------------+------+------+------+------+------|
-   * |      |      |      |Aud on|Audoff|AGnorm|AGswap|Dvorak|Qwerty|      |      |      |
+   * |      |      |      |Aud on|Audoff|      |      |Dvorak|Qwerty|      |      |      |
    * |------+------+------+------+------+------|------+------+------+------+------+------|
    * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|      |      |      |      |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |      |      |      |             |      |      |      |      |      |
+   * |  BL  |      |      |      |      |             |      |      |      |      |      |
    * `-----------------------------------------------------------------------------------'
    */
   [_ADJUST] = {
     {_______, RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL },
-    {_______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP,  DVORAK,  QWERTY, _______, _______, _______},
+    {_______, _______, MU_MOD,  AU_ON,   AU_OFF,  _______, _______,  DVORAK,  QWERTY, _______, _______, _______},
     {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
-    {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
+    {BACKLIT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
   }
 };
 
