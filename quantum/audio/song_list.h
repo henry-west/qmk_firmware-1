@@ -214,8 +214,8 @@
     S__NOTE(_B5),
 
 #define COIN_SOUND \
-    E__NOTE(_A5  ),      \
-    HD_NOTE(_E6  ),
+    E__NOTE(_B5  ),      \
+    WD_NOTE(_E6  ),
 
 #define ONE_UP_SOUND \
     Q__NOTE(_E6  ),  \
@@ -230,6 +230,12 @@
     E__NOTE(_G6),  \
     HD_NOTE(_C7),
 
+#define ZELDA_ITEM \
+    QD_NOTE(_A4),  \
+    QD_NOTE(_BF4),  \
+    QD_NOTE(_B4),  \
+    W__NOTE(_C5),  
+
 #define ZELDA_PUZZLE \
     Q__NOTE(_G5),     \
     Q__NOTE(_FS5),    \
@@ -239,5 +245,54 @@
     Q__NOTE(_E5),     \
     Q__NOTE(_GS5),     \
     HD_NOTE(_C6),
+
+#define PIPE_SOUND \
+    S__NOTE(_E6),  \
+    S__NOTE(_A5),  \
+    S__NOTE(_G3),  \
+    S__NOTE(_A5),  \
+    S__NOTE(_G3),  \
+    Q__NOTE(_REST),  \
+    S__NOTE(_E6),  \
+    S__NOTE(_A5),  \
+    S__NOTE(_G3),  \
+    S__NOTE(_A5),  \
+    S__NOTE(_G3),  \
+    Q__NOTE(_REST),  \
+    S__NOTE(_E6),  \
+    S__NOTE(_A5),  \
+    S__NOTE(_G3),  \
+    S__NOTE(_A5),  \
+    S__NOTE(_G3),  \
+    S__NOTE(_REST),  
+
+#define MUSHROOM_SOUND \
+    S__NOTE(_C4),  \
+    S__NOTE(_G3),  \
+    S__NOTE(_C4),  \
+    S__NOTE(_E4),  \
+    S__NOTE(_G4),  \
+    S__NOTE(_C5),  \
+    S__NOTE(_G4),  \
+    S__NOTE(_AF3),  \
+    S__NOTE(_C4),  \
+    S__NOTE(_EF4),  \
+    S__NOTE(_AF4),  \
+    S__NOTE(_C5),  \
+    S__NOTE(_A4),  \
+    S__NOTE(_C5),  \
+    S__NOTE(_EF5),  \
+    S__NOTE(_AF5),  \
+    S__NOTE(_EF5),  \
+    S__NOTE(_BF3),  \
+    S__NOTE(_D4),  \
+    S__NOTE(_F4),  \
+    S__NOTE(_BF4),  \
+    S__NOTE(_D5),  \
+    S__NOTE(_B4),  \
+    S__NOTE(_D5),  \
+    S__NOTE(_F5),  \
+    S__NOTE(_BF5),  \
+    S__NOTE(_F5),
 
 #endif
