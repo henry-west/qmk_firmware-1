@@ -4,10 +4,11 @@
 #include "../../config.h"
 
 #ifdef AUDIO_ENABLE
-    #define STARTUP_SONG SONG(COIN_SOUND)
+    #define STARTUP_SONG SONG(ZELDA_PUZZLE)
 
-    #define DEFAULT_LAYER_SONGS { SONG(ZELDA_PUZZLE), \
-                                  SONG(ZELDA_ITEM) \
+    #define DEFAULT_LAYER_SONGS { SONG(UNDERGROUND), \
+                                  SONG(UNDERGROUND_TWO),  \
+                                  SONG(COIN_SOUND) \
                                 }
 #endif
 

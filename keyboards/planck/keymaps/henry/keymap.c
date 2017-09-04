@@ -23,6 +23,7 @@ extern keymap_config_t keymap_config;
 enum planck_layers {
   _DVORAK,
   _QWERTY,
+  _MOUSE,
   _LOWER,
   _RAISE,
   _NUMPAD,
@@ -32,6 +33,7 @@ enum planck_layers {
 enum planck_keycodes {
   DVORAK = SAFE_RANGE,
   QWERTY,
+  MOUSE,
   NUMPAD,
   LOWER,
   RAISE,
@@ -59,22 +61,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   },
 
   /* Qwerty
- * ,-----------------------------------------------------------------------------------.
- * | Esc  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
- * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Tab  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
- * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |Numpad| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
- * `-----------------------------------------------------------------------------------'
- */
-[_QWERTY] = {
-  {KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
-  {KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
-  {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {NUMPAD,  KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
-},
+   * ,-----------------------------------------------------------------------------------.
+   * | Esc  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
+   * |------+------+------+------+------+-------------+------+------+------+------+------|
+   * | Tab  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
+   * |------+------+------+------+------+------|------+------+------+------+------+------|
+   * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+   * |------+------+------+------+------+------+------+------+------+------+------+------|
+   * |Numpad| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+   * `-----------------------------------------------------------------------------------'
+   */
+  [_QWERTY] = {
+    {KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
+    {KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
+    {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
+    {NUMPAD,  KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  },
+
+  /* Mouse layer
+   * ,-----------------------------------------------------------------------------------.
+   * |      |      | M_UP |      |      |      |      |      |      |SCR_UP|      |      |
+   * |------+------+------+------+------+-------------+------+------+------+------+------|
+   * |      |M_LEFT|M_DOWN|M_RGHT|      |      |      |      |L_CLCK|SCR_DN|R_CLCK|      |
+   * |------+------+------+------+------+------|------+------+------+------+------+------|
+   * |      |      |      |      |      |      |      |      |      |      |      |      |
+   * |------+------+------+------+------+------+------+------+------+------+------+------|
+   * |      |      |      |      |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+   * `-----------------------------------------------------------------------------------'
+   */
+
+  [_MOUSE] = {
+    {XXXXXXX,  XXXXXXX,    KC_MS_UP,   XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,     KC_MS_WH_UP,    XXXXXXX,    XXXXXXX},
+    {XXXXXXX,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,  KC_MS_BTN1,  KC_MS_WH_DOWN,  KC_MS_BTN2, XXXXXXX},
+    {XXXXXXX,   XXXXXXX,   XXXXXXX,    XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,     XXXXXXX,        XXXXXXX,    XXXXXXX},
+    {XXXXXXX,   XXXXXXX,   XXXXXXX,    XXXXXXX,     LOWER,    KC_SPC,   KC_SPC,  RAISE,    KC_LEFT,     KC_DOWN,        KC_UP,      KC_RGHT}
+  },
 
   /* Lower
    * ,-----------------------------------------------------------------------------------.
@@ -135,7 +156,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------------------------------------------------.
    * |      | Reset|      |      |      |      |      |      |      |      |      |  Del |
    * |------+------+------+------+------+-------------+------+------+------+------+------|
-   * |      |      |      |Aud on|Audoff|      |      |Dvorak|Qwerty|      |      |      |
+   * |      |      |      |Aud on|Audoff|      |      |Dvorak|Qwerty|Mouse |      |      |
    * |------+------+------+------+------+------|------+------+------+------+------+------|
    * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|      |      |      |      |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -144,7 +165,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_ADJUST] = {
     {_______, RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL },
-    {_______, _______, MU_MOD,  AU_ON,   AU_OFF,  _______, _______,  DVORAK,  QWERTY, _______, _______, _______},
+    {_______, _______, MU_MOD,  AU_ON,   AU_OFF,  _______, _______,  DVORAK,  QWERTY,   MOUSE, _______, _______},
     {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
     {BACKLIT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
   }
@@ -166,6 +187,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case QWERTY:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_QWERTY);
+      }
+      return false;
+      break;
+    case MOUSE:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_MOUSE);
       }
       return false;
       break;
