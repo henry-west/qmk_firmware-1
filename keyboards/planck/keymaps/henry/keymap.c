@@ -21,29 +21,33 @@
 extern keymap_config_t keymap_config;
 
 enum planck_layers {
-  _DVORAK,
-  _QWERTY,
-  _MOUSE,
-  _LOWER,
-  _RAISE,
-  _NUMPAD,
-  _ADJUST
+	_DVORAK,
+	_QWERTY,
+	_MOUSE,
+	_LOWER,
+	_RAISE,
+	_NUMPAD,
+	_GAMING,
+	_ADJUST
 };
 
 enum planck_keycodes {
-  DVORAK = SAFE_RANGE,
-  QWERTY,
-  MOUSE,
-  NUMPAD,
-  LOWER,
-  RAISE,
-  BACKLIT,
-  EXT_NUM
+	DVORAK = SAFE_RANGE,
+	QWERTY,
+	MOUSE,
+	NUMPAD,
+	GAMING,
+	LOWER,
+	RAISE,
+	BACKLIT,
+	EXT_NUM
 };
 
 enum planck_macros {
-
-}
+	M_MUTE,
+	M_SCREENSHOT,
+	M_RECORD
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Dvorak
@@ -156,17 +160,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     {EXT_NUM, 	XXXXXXX,	XXXXXXX,	XXXXXXX,    XXXXXXX,    KC_ENT, 	KC_ENT,	 KC_0,    KC_DOT, 	  KC_MINS,	XXXXXXX,	XXXXXXX}
   },
 
-  /* Macro layer
+   /* Gaming layer
    * ,-----------------------------------------------------------------------------------.
-   * |      |      |      |      |      |      |      |      |      |      |      |      |
+   * |  Tab |  Q   |  W   |  E   |  R   |  T   |      |      |      |      |Screen|Record|
    * |------+------+------+------+------+-------------+------+------+------+------+------|
-   * |      |      |      |      |      |      |      |      |      |      |      |      |
+   * | Mute |  A   |  S   |  D   |  F   |  G   |      |      |      |      |      |      |
    * |------+------+------+------+------+------|------+------+------+------+------+------|
-   * |      |      |      |      |      |      |      |      |      |      |      |
+   * | Shift|      |      |  C   |  V   |      |      |      |      |      |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |      |      |      |             |      |      |      |      |      |
+   * |  Esc |      |      |      | Lower|    Shoot    | Raise|      |      |      |      |
    * `-----------------------------------------------------------------------------------'
    */
+
+  [_GAMING] = {
+    {KC_TAB,  KC_Q,    KC_W,     KC_E,     KC_R,    KC_T,     _______,    _______,    _______,  _______,  M(M_SCREENSHOT),   M(M_RECORD)},
+    {M(M_MUTE), KC_A,    KC_S,     KC_D,     KC_F,    KC_G,     _______,    _______,    _______,  _______,  _______, 			 _______},
+    {KC_LSFT, _______, _______,  KC_C,     KC_V,    _______,  _______,    _______,    _______,  _______,  _______, 			_______ },
+    {KC_ESC,  _______, _______,  _______,  LOWER,   KC_SPC,   KC_SPC,  	  RAISE,  	  _______,  _______,  _______,  		 _______}
+  },
 
   /* Adjust (Lower + Raise)
    * ,-----------------------------------------------------------------------------------.
@@ -181,7 +192,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_ADJUST] = {
     {_______, RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL },
-    {_______, _______, MU_MOD,  AU_ON,   AU_OFF,  _______, _______,  DVORAK,  QWERTY,   MOUSE, _______, _______},
+    {_______, _______, MU_MOD,  AU_ON,   AU_OFF,  _______, _______,  DVORAK,  QWERTY,   MOUSE,  GAMING, _______},
     {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
     {BACKLIT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
   }
@@ -195,8 +206,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
     if (record->event.pressed) {
         switch(id) {
-            case 0:
-                //do stuff
+            case M_MUTE:
+                return MACRO(D(LALT), T(M), U(LALT));
+            	break;
+            case M_SCREENSHOT:
+            	return MACRO(D(LALT), T(F1), U(LALT));
+            	break;
+            case M_RECORD:
+            	return MACRO(D(LALT), T(F2), U(LALT));
+            	break;
         }
     }
     return MACRO_NONE;
@@ -219,6 +237,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case MOUSE:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_MOUSE);
+      }
+      return false;
+      break;
+    case GAMING:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_GAMING);
       }
       return false;
       break;
