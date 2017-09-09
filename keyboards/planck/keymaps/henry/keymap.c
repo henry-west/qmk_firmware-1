@@ -91,21 +91,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    /* Gaming layer
    * ,-----------------------------------------------------------------------------------.
-   * |  Tab |  Q   |  W   |  E   |  R   |  T   |      |      |      |      |Screen|Record|
+   * |Score |  '   | Fwd  |  .   |Reload|  Y   |  F   |  G   |  C   |  R   |  L   | Bksp |
    * |------+------+------+------+------+-------------+------+------+------+------+------|
-   * | Mute |  A   |  S   |  D   |  F   |  G   |      |      |      |      |      |      |
+   * | Mute | Left | Back |Right |  U   |  I   |  D   |  H   |  T   |  N   |  S   |  -   |
    * |------+------+------+------+------+------|------+------+------+------+------+------|
-   * | Shift|      |      |  C   |  V   |      |      |      |      |      |      |
+   * |Shift |  ;   |  Q   |  J   |  K   |  X   |  B   |  M   |  W   |  V   |  Z   |Enter |
    * |------+------+------+------+------+------+------+------+------+------+------+------|
-   * |  Esc |      |      |      | Lower|    Shoot    | Raise|      |      |      |      |
+   * | Menu |      |      |      | Lower|   Pew Pew   | Raise|      |      |Record|Screen|
    * `-----------------------------------------------------------------------------------'
    */
 
   [_GAMING] = {
-    {KC_TAB, 	 KC_Q,    KC_W,     KC_E,     KC_R,    KC_T,     _______,    _______,    _______,  _______,  M(M_SCREENSHOT),   M(M_RECORD)},
-    {M(M_MUTE), KC_A,     KC_S,     KC_D,     KC_F,    KC_G,     _______,    _______,    _______,  _______,  _______, 			 _______},
-    {KC_LSFT,	 _______, _______,  KC_C,     KC_V,    _______,  _______,    _______,    _______,  _______,  _______, 			_______ },
-    {KC_ESC, 	 _______, _______,  _______,  LOWER,   KC_SPC,   KC_SPC,  	  RAISE,     _______,  _______,  _______,  		 _______}
+    {KC_TAB, 	KC_QUOT, KC_COMM,  KC_DOT,   KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,     KC_R,     KC_L,			KC_BSPC},
+    {M(M_MUTE),	KC_A,    KC_O,     KC_E,     KC_U,    KC_I,    KC_D,    KC_H,    KC_T,     KC_N,     KC_S,			KC_MINS},
+    {KC_LSFT,	KC_SCLN, KC_Q,     KC_J,     KC_K,    KC_X,    KC_B,    KC_M,    KC_W,     KC_V,     KC_Z, 			KC_ENT },
+    {KC_ESC, 	_______, _______,  _______,  LOWER,   KC_SPC,  KC_SPC,  RAISE,   _______,  _______,  M(M_RECORD),  	M(M_SCREENSHOT)}
   },
 
   /* Lower

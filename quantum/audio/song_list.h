@@ -295,10 +295,6 @@
     S__NOTE(_BF5),  \
     S__NOTE(_F5),
 
-#define WAKA_WAKA   \
-    T__NOTE(_E3), T__NOTE(_BF3), T__NOTE(_EF4), T__NOTE(_GF4),  T__NOTE(_A4), T__NOTE(_REST), \
-    T__NOTE(_B4), T__NOTE(_G4), T__NOTE(_GS4), T__NOTE(_F4), T__NOTE(_CS4), T__NOTE(_GS3), 
-
 #define UNDERGROUND \
     ED_NOTE(_C4),    \
     ED_NOTE(_C5),    \
