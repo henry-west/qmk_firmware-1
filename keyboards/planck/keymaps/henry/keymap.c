@@ -1,19 +1,3 @@
-/* Copyright 2015-2017 Jack Humbert
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 #include "planck.h"
 #include "action_layer.h"
 #include "audio.h"
@@ -24,10 +8,10 @@ enum planck_layers {
 	_DVORAK,
 	_QWERTY,
 	_MOUSE,
+	_GAMING,
 	_LOWER,
 	_RAISE,
 	_NUMPAD,
-	_GAMING,
 	_ADJUST
 };
 
@@ -35,8 +19,8 @@ enum planck_keycodes {
 	DVORAK = SAFE_RANGE,
 	QWERTY,
 	MOUSE,
-	NUMPAD,
 	GAMING,
+	NUMPAD,
 	LOWER,
 	RAISE,
 	BACKLIT,
@@ -44,7 +28,7 @@ enum planck_keycodes {
 };
 
 enum planck_macros {
-	M_MUTE,
+	M_MUTE = 0,
 	M_SCREENSHOT,
 	M_RECORD
 };
@@ -105,6 +89,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     {XXXXXXX,   XXXXXXX,   XXXXXXX,    XXXXXXX,     LOWER,    KC_SPC,   KC_SPC,  RAISE,    KC_LEFT,     KC_DOWN,        KC_UP,      KC_RGHT}
   },
 
+   /* Gaming layer
+   * ,-----------------------------------------------------------------------------------.
+   * |  Tab |  Q   |  W   |  E   |  R   |  T   |      |      |      |      |Screen|Record|
+   * |------+------+------+------+------+-------------+------+------+------+------+------|
+   * | Mute |  A   |  S   |  D   |  F   |  G   |      |      |      |      |      |      |
+   * |------+------+------+------+------+------|------+------+------+------+------+------|
+   * | Shift|      |      |  C   |  V   |      |      |      |      |      |      |
+   * |------+------+------+------+------+------+------+------+------+------+------+------|
+   * |  Esc |      |      |      | Lower|    Shoot    | Raise|      |      |      |      |
+   * `-----------------------------------------------------------------------------------'
+   */
+
+  [_GAMING] = {
+    {KC_TAB, 	 KC_Q,    KC_W,     KC_E,     KC_R,    KC_T,     _______,    _______,    _______,  _______,  M(M_SCREENSHOT),   M(M_RECORD)},
+    {M(M_MUTE), KC_A,     KC_S,     KC_D,     KC_F,    KC_G,     _______,    _______,    _______,  _______,  _______, 			 _______},
+    {KC_LSFT,	 _______, _______,  KC_C,     KC_V,    _______,  _______,    _______,    _______,  _______,  _______, 			_______ },
+    {KC_ESC, 	 _______, _______,  _______,  LOWER,   KC_SPC,   KC_SPC,  	  RAISE,     _______,  _______,  _______,  		 _______}
+  },
+
   /* Lower
    * ,-----------------------------------------------------------------------------------.
    * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Del  |
@@ -160,30 +163,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     {EXT_NUM, 	XXXXXXX,	XXXXXXX,	XXXXXXX,    XXXXXXX,    KC_ENT, 	KC_ENT,	 KC_0,    KC_DOT, 	  KC_MINS,	XXXXXXX,	XXXXXXX}
   },
 
-   /* Gaming layer
-   * ,-----------------------------------------------------------------------------------.
-   * |  Tab |  Q   |  W   |  E   |  R   |  T   |      |      |      |      |Screen|Record|
-   * |------+------+------+------+------+-------------+------+------+------+------+------|
-   * | Mute |  A   |  S   |  D   |  F   |  G   |      |      |      |      |      |      |
-   * |------+------+------+------+------+------|------+------+------+------+------+------|
-   * | Shift|      |      |  C   |  V   |      |      |      |      |      |      |
-   * |------+------+------+------+------+------+------+------+------+------+------+------|
-   * |  Esc |      |      |      | Lower|    Shoot    | Raise|      |      |      |      |
-   * `-----------------------------------------------------------------------------------'
-   */
-
-  [_GAMING] = {
-    {KC_TAB,  KC_Q,    KC_W,     KC_E,     KC_R,    KC_T,     _______,    _______,    _______,  _______,  M(M_SCREENSHOT),   M(M_RECORD)},
-    {M(M_MUTE), KC_A,    KC_S,     KC_D,     KC_F,    KC_G,     _______,    _______,    _______,  _______,  _______, 			 _______},
-    {KC_LSFT, _______, _______,  KC_C,     KC_V,    _______,  _______,    _______,    _______,  _______,  _______, 			_______ },
-    {KC_ESC,  _______, _______,  _______,  LOWER,   KC_SPC,   KC_SPC,  	  RAISE,  	  _______,  _______,  _______,  		 _______}
-  },
-
   /* Adjust (Lower + Raise)
    * ,-----------------------------------------------------------------------------------.
    * |      | Reset|      |      |      |      |      |      |      |      |      |  Del |
    * |------+------+------+------+------+-------------+------+------+------+------+------|
-   * |      |      |      |Aud on|Audoff|      |      |Dvorak|Qwerty|Mouse |      |      |
+   * |      |      |      |Aud on|Audoff|      |      |Dvorak|Qwerty|Mouse |Gaming|      |
    * |------+------+------+------+------+------|------+------+------+------+------+------|
    * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|      |      |      |      |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------|
