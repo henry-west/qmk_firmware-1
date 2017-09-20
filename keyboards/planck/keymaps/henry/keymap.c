@@ -191,14 +191,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
     if (record->event.pressed) {
         switch(id) {
             case M_MUTE:
-                return MACRO(D(LALT), T(M), U(LALT));
-            	break;
+                return MACRO(D(LALT), T(M), U(LALT), END);
             case M_SCREENSHOT:
-            	return MACRO(D(LALT), T(F1), U(LALT));
-            	break;
+            	return MACRO(D(LALT), T(F1), U(LALT), END);
             case M_RECORD:
-            	return MACRO(D(LALT), T(F2), U(LALT));
-            	break;
+            	return MACRO(D(LALT), T(F2), U(LALT), END);
         }
     }
     return MACRO_NONE;
